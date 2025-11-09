@@ -1,0 +1,31 @@
+{
+  "timestamp": "20251109_105912",
+  "total_rows": 89554,
+  "datasets": {
+    "prices_with_indicators": {
+      "rows": 79000,
+      "columns": 12,
+      "file": "prices_with_indicators_20251109_105912.csv"
+    },
+    "market_correlations": {
+      "rows": 3934,
+      "columns": 6,
+      "file": "market_correlations_20251109_105912.csv"
+    },
+    "company_fundamentals": {
+      "rows": 136,
+      "columns": 21,
+      "file": "company_fundamentals_20251109_105912.csv"
+    },
+    "market_events": {
+      "rows": 6463,
+      "columns": 8,
+      "file": "market_events_20251109_105912.csv"
+    },
+    "sector_correlations": {
+      "rows": 21,
+      "columns": 7,
+      "file": "sector_correlations_20251109_105912.csv"
+    }
+  }
+}
