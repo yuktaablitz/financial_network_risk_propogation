@@ -1,0 +1,71 @@
+{
+  "timestamp": "2025-11-09T13:50:40.365815",
+  "total_nodes": 4615,
+  "total_edges": 19347,
+  "layers": {
+    "banking": {
+      "nodes": 4476,
+      "edges": 13532,
+      "node_types": {
+        "fdic_bank": 4376,
+        "bank": 100
+      },
+      "relationship_types": {
+        "interbank_lending": 3128,
+        "overnight_lending": 2042,
+        "repo_agreement": 1960,
+        "credit_line": 1403,
+        "reverse_repo": 1394,
+        "derivative_exposure": 1361,
+        "correspondent_banking": 770,
+        "letter_of_credit": 719,
+        "syndicated_loan": 455,
+        "fed_funds_transaction": 300
+      },
+      "avg_degree": 3.0232350312779266,
+      "density": 0.0006755832472129446
+    },
+    "market": {
+      "nodes": 136,
+      "edges": 3934,
+      "node_types": {
+        "stock": 136
+      },
+      "relationship_types": {
+        "market_correlation": 3934
+      },
+      "avg_degree": 28.926470588235293,
+      "density": 0.21427015250544662
+    },
+    "ownership": {
+      "nodes": 3,
+      "edges": 1881,
+      "node_types": {
+        "institutional_investor": 3
+      },
+      "relationship_types": {
+        "equity_ownership": 1875,
+        "cross_institutional_holding": 6
+      },
+      "avg_degree": 627.0,
+      "density": 313.5
+    }
+  },
+  "datasets_used": [
+    "banking_indicators",
+    "interbank_lending",
+    "institution_profiles",
+    "stress_events",
+    "daily_positions",
+    "market_prices",
+    "market_correlations",
+    "company_fundamentals",
+    "market_events",
+    "fdic_active_banks",
+    "fdic_failed_banks",
+    "company_cik",
+    "13f_holdings",
+    "ownership_network",
+    "economic_indicators"
+  ]
+}
