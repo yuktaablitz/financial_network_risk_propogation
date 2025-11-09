@@ -17,5 +17,16 @@ Company mappings, 13F institutional holdings, insider transactions
 FRED economic data, stress indicators, unified network creation
 
 ****Data Integration****
+Integrates all the rows from the above scriots and produces csv files with nodes and edges required.
 
+Nodes (unified_nodes.csv):
 
+Banks: synthetic + FDIC (if available)
+Stocks: all companies with fundamentals
+Institutional investors: unique CIKs from 13F holdings
+
+Edges (unified_edges.csv):
+
+Interbank lending (bank → bank)
+Market correlations (stock → stock)
+Ownership (institution → stock)
