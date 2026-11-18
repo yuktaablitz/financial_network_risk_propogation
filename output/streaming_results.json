@@ -1,11 +1,11 @@
 {
   "bloom_filter": {
-    "size": 10000,
-    "hash_count": 5,
-    "items_added": 4601,
-    "bits_set": 9994,
-    "fill_rate": 0.9994,
-    "estimated_fpr": 0.589805589159197
+    "size": 186056,
+    "hash_count": 7,
+    "items_added": 13606,
+    "bits_set": 74496,
+    "fill_rate": 0.4003955798254289,
+    "estimated_fpr": 0.0016569560939679547
   },
   "dgim": {
     "window_size": 1000,
@@ -54,7 +54,8 @@
   },
   "summary": {
     "edges_processed": 19411,
-    "duplicates_detected": 14810,
+    "duplicates_detected": 5805,
+    "exact_duplicates": 5798,
     "high_risk_edges": 4741
   }
 }
