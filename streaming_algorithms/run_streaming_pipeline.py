@@ -22,7 +22,13 @@ class StreamingPipeline:
         self.edges_path = edges_path
         
         # Initialize streaming algorithms
-        self.bloom_filter = BloomFilter(size=10000, hash_count=5)
+        # Size the Bloom filter for the stream so it doesn't saturate (a fixed
+        # 10,000-bit filter fills up after ~2,000 edges and reports false duplicates).
+        with open(edges_path) as f:
+            expected_edges = max(1, sum(1 for _ in f) - 1)
+        self.bloom_filter = BloomFilter.for_capacity(expected_edges, target_fpr=0.01)
+        self.exact_seen = set()  # exact check, used only to report the filter's real accuracy
+        self.exact_duplicates = 0
         self.dgim = DGIM(window_size=1000)
         self.flajolet_martin_src = FlajoletMartin(num_hash_functions=10)
         self.flajolet_martin_dst = FlajoletMartin(num_hash_functions=10)
@@ -67,6 +73,10 @@ class StreamingPipeline:
         weight = edge.get('weight', 0)
         
         edge_id = f"{src}-{dst}"
+        if edge_id in self.exact_seen:
+            self.exact_duplicates += 1
+        else:
+            self.exact_seen.add(edge_id)
         
         # 1. Bloom Filter: Check for duplicates
         if edge_id in self.bloom_filter:
@@ -102,7 +112,7 @@ class StreamingPipeline:
         print("\n🔍 Bloom Filter:")
         bf_stats = self.bloom_filter.stats()
         print(f"   Items added: {bf_stats['items_added']}")
-        print(f"   Duplicates detected: {self.duplicates_detected}")
+        print(f"   Duplicates detected: {self.duplicates_detected} (exact count: {self.exact_duplicates})")
         print(f"   Fill rate: {bf_stats['fill_rate']:.2%}")
         print(f"   Estimated FPR: {bf_stats['estimated_fpr']:.4f}")
         
@@ -139,6 +149,7 @@ class StreamingPipeline:
             'summary': {
                 'edges_processed': self.edges_processed,
                 'duplicates_detected': self.duplicates_detected,
+                'exact_duplicates': self.exact_duplicates,
                 'high_risk_edges': self.high_risk_edges
             }
         }

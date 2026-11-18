@@ -20,6 +20,18 @@ class BloomFilter:
         self.bit_array = bitarray(size)
         self.bit_array.setall(0)
         self.items_added = 0
+
+    @classmethod
+    def for_capacity(cls, expected_items, target_fpr=0.01):
+        """Size the filter for an expected number of items and a target false-positive rate.
+
+        m = -n ln(p) / (ln 2)^2 bits, k = (m / n) ln 2 hash functions.
+        """
+        import math
+        n = max(1, int(expected_items))
+        m = math.ceil(-n * math.log(target_fpr) / (math.log(2) ** 2))
+        k = max(1, round((m / n) * math.log(2)))
+        return cls(size=m, hash_count=k)
     
     def add(self, item):
         """Add item to filter"""
